@@ -1,0 +1,71 @@
+what is python ?
+     python is a high level , interpreted, general purpose 
+     and object oriented programming language
+
+     Applicatoin :
+     1. web development
+     2. Ai
+     3. Machine learning
+     4. data science
+     5. automation
+
+
+python --version
+
+variable :
+
+    var_name = value
+
+Data Types :
+    int => 100
+    float => 100.0
+    str => "python" 'python'
+    boolean => True or False
+
+print() => a function used to print
+type() => a function used to check the type
+input() => used to get input from the user
+
+if-else : is used to make a decision based on a condition
+
+if condition1 :
+    statements
+    line 2
+    line 3
+elif condition2:
+    line 1 
+    line 2
+elif condition3:
+
+else : 
+
+===============
+Loops : is used to repeat a block of code
+1. for Loop
+2. while loop
+
+
+=============
+Function : is a reusable block of code that performs a 
+            specific task:
+
+Day 2
+
+venv = python -m venv venv
+venv activate cmd = > ./venv/Scripts/activate
+
+Django install cmd => pip install django
+
+project cmd = django-admin startproject projectname .
+run cmd = python manage.py runserver
+app creation cmd = python manage.py startpapp appname
+
+Day 3 :
+
+MVT => MODEL VIEW TEMPLATE
+
+MODEL = USED FOR DATABASE
+VIEW = RESPONSIBLE BUSSINES LOGIC
+TEMPLATE = RESPONSIBLE FOR UI
+
+TEMPLATE INHERITANCE :
