@@ -69,3 +69,4 @@ VIEW = RESPONSIBLE BUSSINES LOGIC
 TEMPLATE = RESPONSIBLE FOR UI
 
 TEMPLATE INHERITANCE :
+Django Model : It represents a database table using python code
