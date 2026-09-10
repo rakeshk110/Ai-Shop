@@ -5,6 +5,26 @@
 {% endblock %}
 
 {% block content %}
- <h1>Home page</h1>
+
+<section>
+    <h3>Shop by Category</h3>
+    {% for category in categories %}
+        <a href="{% url 'category_products' category.id %}">{{category.name}}</a>
+    {% endfor %}
+</section>
+
+<section>
+    <h3>Popular Products</h3>
+    {% for product in products %}
+        <div>
+            <h3>{{product.name}}</h3>
+            <p>${{product.price}}</p>
+        </div>
+        <hr>
+    {% endfor %}
+</section>
+
+
+ 
 {% endblock %}
    
