@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import home,category_products
+from .views import home,category_products,product_create
 
 urlpatterns = [
-    path("home/",home),
-    path("category/<int:category_id>/", category_products,name="category_products")
+    path("home/",home, name="home"),
+    path("category/<int:category_id>/", category_products,name="category_products"),
+    path("create_product/",product_create),
     
 ]

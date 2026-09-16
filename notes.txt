@@ -72,3 +72,4 @@ TEMPLATE INHERITANCE :
 Django Model : It represents a database table using python code
 Django ORM : Object Relational Mapping , it allow us to interact with the 
              database using python code instead of writing SQL queries manually
+
