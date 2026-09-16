@@ -32,14 +32,27 @@ def product_create(request):
     return render(request,"products/product_form.html",{"form":form})
 
 def product_list(request):
-
     products = Product.objects.all()
+    return render(request,"products/product_list.html",{"products":products})
 
-    return render(
-        request,
-        "products/product_list.html",
-        {
-            "products": products
-        }
-    )
 
+def product_update(request, product_id):
+    product = get_object_or_404(Product,id=product_id)
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES, instance=product)
+
+        if form.is_valid():
+            form.save()
+            return redirect("list_product")
+    else:
+        form = ProductForm(instance=product)
+
+    return render(request,"products/product_form.html",{"form":form})
+
+
+def product_delete(request,product_id):
+    product = get_object_or_404(Product,id=product_id)
+    if request.method == "POST":
+        product.delete()
+        return redirect("list_product")
+    return render(request,"products/product_confirm_delete.html",{"product":product})
