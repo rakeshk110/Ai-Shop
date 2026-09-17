@@ -19,6 +19,7 @@
         <div>
             <h3>{{product.name}}</h3>
             <p>${{product.price}}</p>
+            <a href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
         </div>
         <hr>
     {% endfor %}
