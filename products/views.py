@@ -82,3 +82,30 @@ def cart(request):
     return render(request,"products/cart.html",{
         "cart_items":cart_item,
         "total_price":total_price})
+
+@login_required
+def increase_quantity(request,product_id):
+    cart_item = get_object_or_404(CartItem,
+                      user=request.user,
+                      product_id=product_id)
+    cart_item.quantity +=1
+    cart_item.save()
+    return redirect("cart")
+
+@login_required
+def decrease_quantity(request,product_id):
+    cart_item = get_object_or_404(CartItem,
+                      user=request.user,
+                      product_id=product_id)
+    if cart_item.quantity > 1:
+         cart_item.quantity -=1
+         cart_item.save()
+    return redirect("cart")
+
+@login_required
+def remove_from_cart(request, product_id):
+    cart_item = get_object_or_404(CartItem,
+                          user=request.user,
+                          product_id=product_id)
+    cart_item.delete()
+    return redirect("cart")

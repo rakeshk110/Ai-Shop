@@ -1,0 +1,23 @@
+{% extends "base.html "%}
+{% block title %}
+Order Page
+{% endblock %}
+
+
+{% block content %}
+<h2>My Orders</h2>
+{%for order in orders %}
+<div>
+    <h3>Order # {{order.id }}</h3>
+    <p>Product : {{order.product.name}}</p>
+    <p>Quantity : {{order.quantity}}</p>
+    <p>Price : {{order.price}}</p>
+    <p>Total : {{order.total}}</p>
+    <p>Date : {{order.created_at}}</p>
+    
+</div>
+<hr>
+{% empty %}
+<p>No orders yet </p>
+{% endfor %}
+{% endblock %}
