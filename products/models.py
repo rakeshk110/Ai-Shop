@@ -30,3 +30,16 @@ class CartItem(models.Model):
         return f"{self.user.username}-{self.product.name}"
 
 
+class UserActivity(models.Model):
+    ACTIVITY_CHOICES = [
+        ('VIEW','View'),
+        ('CART','Add to Cart'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    activity = models.CharField(max_length=10,choices=ACTIVITY_CHOICES)
+    create_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.product.name} - {self.activity}"

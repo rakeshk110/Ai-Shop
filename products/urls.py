@@ -13,6 +13,7 @@ urlpatterns = [
     path("cart/increase/<int:product_id>/", increase_quantity, name="increase_quantity"),
     path("cart/decrease/<int:product_id>/", decrease_quantity, name="decrease_quantity"),
     path("cart/remove/<int:product_id>/", remove_from_cart, name="remove_from_cart"),
+    path("product/<int:product_id>/",product_detail,name="product_detail"),
 
     
 ]

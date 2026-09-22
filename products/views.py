@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404,redirect
-from .models import Product,Category,CartItem
+from .models import Product,Category,CartItem,UserActivity
 from .forms import ProductForm
 from django.contrib.auth.decorators import login_required
 
@@ -68,6 +68,12 @@ def add_to_cart(request,product_id):
     if not created:
         cart_item.quantity +=1
         cart_item.save()
+
+    UserActivity.objects.create(
+        user = request.user,
+        product = product,
+        activity = "CART"
+    )
     return redirect("home")
 
 
@@ -109,3 +115,15 @@ def remove_from_cart(request, product_id):
                           product_id=product_id)
     cart_item.delete()
     return redirect("cart")
+
+@login_required
+def product_detail(request,product_id):
+    product = get_object_or_404(Product,id=product_id)
+
+    UserActivity.objects.create(
+        user=request.user,
+        product=product,
+        activity = "VIEW"
+
+    )
+    return render(request,"products/product_detail.html",{"product":product})
