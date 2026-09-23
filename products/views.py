@@ -2,13 +2,26 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .models import Product,Category,CartItem,UserActivity
 from .forms import ProductForm
 from django.contrib.auth.decorators import login_required
+from .ai import get_user_interest
 
 def home(request):
     products = Product.objects.all()
     categories = Category.objects.all()
+
+    recommended_products = []
+    activities = UserActivity.objects.filter(user=request.user).select_related("product")
+    if activities.exists():
+        category_name = get_user_interest(activities)
+        category = Category.objects.filter(name__iexact=category_name).first()
+        if category:
+            recommended_products = Product.objects.filter(Category=category)
+
+
+
     return render(request,"home.html",{
         "products":products,
-        "categories": categories
+        "categories": categories,
+        "recommended_products":recommended_products
         })
 
 def category_products(request,category_id):
