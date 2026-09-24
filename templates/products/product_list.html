@@ -1,25 +1,29 @@
-{% extends "base.html "%}
+{% extends "base.html" %}
 {% block title %}
 Products List
 {% endblock %}
 
 {% block content %}
-<h2>Product Management</h2>
-<a href="{% url 'product_create' %}">Add Product</a>
-
-<hr>
-{% for product in products %}
-<div>
-    <h3>{{product.name}}</h3>
-    <p>{{product.description}}</p>
-    <p>Price: {{product.price}}</p>
-    <p>Stock: {{product.stock}}</p>
-    <p>Category: {{product.Category.name}}</p>
-    <a href="{% url 'product_update' product.id %}">update</a>
-    <a href="{% url 'product_delete' product.id %}">delete</a>
-    <hr>
+<div class="page-heading">
+    <h2>Product Management</h2>
+    <a class="btn btn-primary" href="{% url 'product_create' %}">Add Product</a>
 </div>
+
+<div class="manage-list">
+{% for product in products %}
+    <article class="manage-card">
+        <h3>{{ product.name }}</h3>
+        <p class="product-desc">{{ product.description }}</p>
+        <p>Price: ${{ product.price }}</p>
+        <p>Stock: {{ product.stock }}</p>
+        <p>Category: {{ product.Category.name }}</p>
+        <div class="form-actions">
+            <a class="btn btn-secondary" href="{% url 'product_update' product.id %}">Update</a>
+            <a class="btn btn-danger" href="{% url 'product_delete' product.id %}">Delete</a>
+        </div>
+    </article>
 {% empty %}
-<p>No Products available</p>
+    <p class="empty-state">No Products available</p>
 {% endfor %}
+</div>
 {% endblock %}

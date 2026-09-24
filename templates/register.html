@@ -1,17 +1,25 @@
-{% extends "base.html "%}
+{% extends "base.html" %}
 
 {% block title %}
 Register
 {% endblock %}
 
 {% block content %}
-<h2>Register</h2>
-<form action="" method="POST">
-    {% csrf_token %}
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <button type="submit">Register</button>
-</form>
-<p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+<div class="auth-wrap">
+    <div class="form-card">
+        <h2>Register</h2>
+        <p class="subtitle">Create an account to track orders and get recommendations.</p>
+        {% if error %}
+            <p class="form-error">{{ error }}</p>
+        {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button class="btn btn-primary" type="submit">Register</button>
+        </form>
+        <p class="form-footer">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+</div>
 {% endblock %}

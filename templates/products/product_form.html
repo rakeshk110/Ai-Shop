@@ -1,14 +1,23 @@
-{% extends "base.html "%}
+{% extends "base.html" %}
 {% block title %}
 Product
 {% endblock %}
 
 {% block content %}
-<h2>Products</h2>
-
-<form method="POST" enctype="multipart/form-data">
-{% csrf_token %}
-{{form}}
-<button type="submit">Save Product</button>
-</form>
-{% endblock  %}
+<div class="form-wrap">
+    <div class="form-card wide">
+        <h2>Product</h2>
+        <p class="subtitle">Fill in the details and save your product.</p>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="django-form">
+                {{ form }}
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Save Product</button>
+                <a class="btn btn-secondary" href="{% url 'list_product' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

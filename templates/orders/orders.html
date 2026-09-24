@@ -1,23 +1,25 @@
-{% extends "base.html "%}
+{% extends "base.html" %}
 {% block title %}
 Order Page
 {% endblock %}
 
-
 {% block content %}
-<h2>My Orders</h2>
-{%for order in orders %}
-<div>
-    <h3>Order # {{order.id }}</h3>
-    <p>Product : {{order.product.name}}</p>
-    <p>Quantity : {{order.quantity}}</p>
-    <p>Price : {{order.price}}</p>
-    <p>Total : {{order.total}}</p>
-    <p>Date : {{order.created_at}}</p>
-    
+<div class="page-heading">
+    <h2>My Orders</h2>
 </div>
-<hr>
+
+<div class="order-grid">
+{% for order in orders %}
+    <article class="order-card">
+        <h3>Order # {{ order.id }}</h3>
+        <div class="order-row"><span>Product</span><span>{{ order.product.name }}</span></div>
+        <div class="order-row"><span>Quantity</span><span>{{ order.quantity }}</span></div>
+        <div class="order-row"><span>Price</span><span>${{ order.price }}</span></div>
+        <div class="order-row"><span>Total</span><span>${{ order.total }}</span></div>
+        <div class="order-row"><span>Date</span><span>{{ order.created_at }}</span></div>
+    </article>
 {% empty %}
-<p>No orders yet </p>
+    <p class="empty-state">No orders yet</p>
 {% endfor %}
+</div>
 {% endblock %}

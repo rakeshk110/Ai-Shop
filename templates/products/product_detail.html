@@ -1,14 +1,27 @@
 {% extends "base.html" %}
 
 {% block title %}
-    {{product.name}}
+    {{ product.name }}
 {% endblock %}
 
 {% block content %}
-<h2>{{product.name}}</h2>
-<p>{{product.descriptin}}</p>
-<p>Price : {{product.price}}</p>
-<p>Stock : {{product.stock}}</p>
-<a href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
-<a href="{% url 'orders'  %}">Place Order</a>
+<article class="detail-card">
+    <div class="detail-media">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+            <div class="product-image-placeholder">No image</div>
+        {% endif %}
+    </div>
+    <div class="detail-info">
+        <h2>{{ product.name }}</h2>
+        <p class="product-desc">{{ product.description }}</p>
+        <p class="price">Price: ${{ product.price }}</p>
+        <p class="stock">Stock: {{ product.stock }}</p>
+        <div class="card-actions">
+            <a class="btn btn-primary" href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
+            <a class="btn btn-accent" href="{% url 'orders' %}">Place Order</a>
+        </div>
+    </div>
+</article>
 {% endblock %}
