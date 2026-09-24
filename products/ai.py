@@ -3,33 +3,40 @@ from django.conf import settings
 
 client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
+
 def get_user_interest(activities):
-    products = []
 
-    for acitivity in activities:
-        products.append(acitivity)
+    try:
+        products = []
 
-    prompt = f"""
-    You are a product recommendation system.
+        for activity in activities:
+            products.append(activity.product.name)
 
-    Available categories:
-    Laptops
-    Mobiles
-    Fashion
-    Books
-    Accessories
+        prompt = f"""
+        You are a product recommendation system.
 
-    User acitivity:
-    {products}
+        Available categories:
+        Laptop
+        Mobiles
+        Fashion
+        Books
+        Accessories
 
-    Identify which one category the user is most intrested in.
-    Return only one category name from the available categories.
-"""
+        User activity:
+        {products}
 
-    response = client.models.generate_content(
-        model = "gemini-3.6-flash",
-        contents=prompt
-    )
+        Identify which ONE category the user is most interested in.
 
-    category = response.text.strip()
-    return category
+        Return ONLY one category name from the available categories.
+        """
+
+        response = client.models.generate_content(
+            model="gemini-3.6-flash",
+            contents=prompt
+        )
+
+        return response.text.strip()
+
+    except Exception as e:
+        print("Gemini API Error:", e)
+        return None

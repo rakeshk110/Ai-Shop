@@ -5,24 +5,42 @@ from django.contrib.auth.decorators import login_required
 from .ai import get_user_interest
 
 def home(request):
+
     products = Product.objects.all()
     categories = Category.objects.all()
 
     recommended_products = []
-    activities = UserActivity.objects.filter(user=request.user).select_related("product")
-    if activities.exists():
-        category_name = get_user_interest(activities)
-        category = Category.objects.filter(name__iexact=category_name).first()
-        if category:
-            recommended_products = Product.objects.filter(Category=category)
 
+    if request.user.is_authenticated:
 
+        activities = UserActivity.objects.filter(
+            user=request.user
+        ).select_related("product")
 
-    return render(request,"home.html",{
-        "products":products,
-        "categories": categories,
-        "recommended_products":recommended_products
-        })
+        if activities.exists():
+
+            category_name = get_user_interest(activities)
+
+            if category_name:
+
+                category = Category.objects.filter(
+                    name__iexact=category_name
+                ).first()
+
+                if category:
+                    recommended_products = Product.objects.filter(
+                        Category=category
+                    )
+
+    return render(
+        request,
+        "home.html",
+        {
+            "products": products,
+            "categories": categories,
+            "recommended_products": recommended_products,
+        }
+    )
 
 def category_products(request,category_id):
     category = get_object_or_404(Category,id=category_id)

@@ -2,7 +2,7 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path("home/",home, name="home"),
+    path("",home, name="home"),
     path("category/<int:category_id>/", category_products, name="category_products"),
     path("create_product/", product_create, name="product_create"),
     path("list/",product_list, name="list_product"),
