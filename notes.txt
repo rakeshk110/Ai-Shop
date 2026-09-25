@@ -73,3 +73,30 @@ Django Model : It represents a database table using python code
 Django ORM : Object Relational Mapping , it allow us to interact with the 
              database using python code instead of writing SQL queries manually
 
+
+========Deployment==========
+STEP 1 : Install modules
+
+pip install gunicorn whitenoise dj-database-url psycopg2-binary google-genai pillow
+
+STEP 2 : Create Requirement file
+pip freeze > requirements.txt
+
+STEP 3 — Configure settings.py
+    import os
+    import dj_database_url
+
+    Move Secret key into .env file
+    Set Debug = False
+
+    Database connection
+    Config static files
+    Add the Middleware
+
+STEP 4 : Create automatic superuser
+STEP 5 : Automatically create categories
+STEP 6 : Create build.sh
+STEP 7 : python manage.py check
+STEP 8 : python manage.py migrate
+STEP 9 : python manage.py collectstatic
+STEP 10 :python manage.py runserver
